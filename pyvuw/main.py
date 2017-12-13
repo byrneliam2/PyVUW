@@ -3,8 +3,8 @@ Liam Byrne (byrneliam2)
 PyVUW
 """
 
-from ui.ui import UI
-from ui.io import *
+from pyvuw.ui.ui import UI
+from pyvuw.ui.io import *
 
 
 class Main:

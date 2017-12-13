@@ -4,9 +4,9 @@ PyVUW
 """
 
 import json
-from org.organiser import Organiser
+from pyvuw.org.organiser import Organiser
 
-JSON_NAME = "pyvuw.json"
+JSON_NAME = "store.json"
 
 
 class PyVUWInputStream:

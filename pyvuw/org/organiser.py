@@ -3,8 +3,6 @@ Liam Byrne (byrneliam2)
 PyVUW
 """
 
-from org.coursework import *
-
 
 class Organiser:
     """
