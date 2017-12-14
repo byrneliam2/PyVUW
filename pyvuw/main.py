@@ -18,7 +18,7 @@ class Main:
         self.ui = UI(self.org)
         while self.ui.is_running():
             self.ui.do_next()
-        PyVUWOutputStream.send_out(self.org)
+        PyVUWOutputStream.write_out(self.org)
 
 
 # start

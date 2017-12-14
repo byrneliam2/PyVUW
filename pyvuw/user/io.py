@@ -25,6 +25,6 @@ class PyVUWInputStream:
 class PyVUWOutputStream:
 
     @staticmethod
-    def send_out(org):
+    def write_out(org):
         with open(JSON_NAME, 'w') as out:
-            json.dump(org.__dict__, out, default=lambda x: x.__dict__, indent=1)
+            json.dump(org.__dict__, out, default=lambda obj: obj.__dict__, indent=1)
