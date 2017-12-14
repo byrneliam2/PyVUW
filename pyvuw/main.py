@@ -9,7 +9,8 @@ from user.io import *
 
 class Main:
     """
-    Main runner class for the PyVUW application.
+    Main runner class for the PyVUW application. Loops the execution of the
+    user input control until a terminate command is sent.
     """
 
     def __init__(self):

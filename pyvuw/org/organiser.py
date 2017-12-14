@@ -7,7 +7,8 @@ PyVUW
 class Organiser:
     """
     The Organiser is the hub of the application. It provides a collection of courses
-    and options to modify each course.
+    and options to modify each course. The courses are referred to by name and their
+    workloads are stored a variation of the Coursework class.
     """
 
     def __init__(self):

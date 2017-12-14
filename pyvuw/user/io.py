@@ -15,10 +15,10 @@ class PyVUWInputStream:
     def read_in():
         org = Organiser()
         with open(JSON_NAME, 'r') as js:
-            js_dc = json.load(js)
-        org_dc = js_dc["_Organiser__courses"]
-        for c, w in org_dc.items():
-            org.add_course(c, w)
+            js_dict = json.load(js)
+        org_dict = js_dict["_Organiser__courses"]
+        for course, work in org_dict.items():
+            org.add_course(course, work)
         return org
 
 
