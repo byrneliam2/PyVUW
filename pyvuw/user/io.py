@@ -4,7 +4,7 @@ PyVUW
 """
 
 import json
-from pyvuw.org.organiser import Organiser
+from org.organiser import Organiser
 
 JSON_NAME = "store.json"
 
