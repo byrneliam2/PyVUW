@@ -27,7 +27,9 @@ class UI:
         # TODO add command line argument support as commands
         args = input("> ").split()
         if args[0] == "a":
-            pass
+            self.__org.add_data(args[1:])
+        elif args[0] == "del":
+            self.__org.del_data(args[1:])
         elif args[0] == "man":
             self.print_man()
         elif args[0] == "v":

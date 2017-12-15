@@ -20,22 +20,27 @@ class Organiser:
     def __len__(self):
         return len(self.__courses)
 
-    def add_course(self, name, work):
+    def add_data(self, args):
         """
         Add a new course to the organiser.
-        :param name: course name
-        :param work: list of work associated with course
         """
-        #work.append(Assignment(name, "never"))
-        self.__courses[name] = work
+        if len(args) == 1:
+            self.__courses[args[0]] = []
+        elif len(args) == 2:
+            if args[0] not in self.__courses.keys():
+                self.__courses[args[0]] = [args[1]]
+            else:
+                self.__courses.get(args[0]).append(args[1])
 
-    def del_course(self, name):
+    def del_data(self, args):
         """
         Remove a course from the organiser.
-        :param name: name of the course
         """
-        if name in self.__courses.keys():
-            del self.__courses[name]
+        if args[0] in self.__courses.keys():
+            if len(args) == 1:
+                del self.__courses[args[0]]
+            elif len(args) == 2:
+                self.__courses[args[0]].remove(args[1])
 
     def total_work(self):
         """
