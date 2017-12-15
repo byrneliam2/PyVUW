@@ -26,9 +26,23 @@ class UI:
         """
         # TODO add command line argument support as commands
         args = input("> ").split()
-        {"a": self.foo, "man": self.foo, "v": self.print_all, "x": self.stop}.get(args[0], self.__print_err)(args)
+        if args[0] == "a":
+            pass
+        elif args[0] == "man":
+            self.print_man()
+        elif args[0] == "v":
+            self.print_all()
+        elif args[0] == "x":
+            self.stop()
+        else:
+            self.__print_err(args)
 
-    def print_all(self, args=None):
+    @staticmethod
+    def print_man():
+        with open("man.txt", 'r') as man:
+            print(man.read())
+
+    def print_all(self):
         """
         Reprint the entire organiser.
         """
@@ -42,12 +56,9 @@ class UI:
             print("-" * self.NUM_CNAME, end='')
             print("-" * len(work))
 
+    def stop(self):
+        self.__running = False
+
     @staticmethod
     def __print_err(args):
         print("error: " + "".join(args) + " is not valid")
-
-    def stop(self, args=None):
-        self.__running = False
-
-    def foo(self):
-        pass

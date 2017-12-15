@@ -1,0 +1,11 @@
+=============================================================================================
+a course [date]
+- Add a course into the organiser. If a date is present, a work record is added to the course
+  (assuming it exists).
+
+v
+- View the organiser's current courses and tasks.
+
+x
+- Save the organiser to the storage file and exit.
+=============================================================================================
