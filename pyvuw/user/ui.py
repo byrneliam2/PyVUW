@@ -24,12 +24,11 @@ class UI:
         """
         Take a user input and perform the operation it translates to, if it is correct.
         """
-        # TODO add command line argument support as commands
         args = input("> ").split()
         if args[0] == "a":
-            self.__org.add_data(args[1:])
+            self.__org.add_data(args[1], args[2:])
         elif args[0] == "del":
-            self.__org.del_data(args[1:])
+            self.__org.del_data(args[1], args[2:])
         elif args[0] == "man":
             self.print_man()
         elif args[0] == "v":
@@ -41,6 +40,9 @@ class UI:
 
     @staticmethod
     def print_man():
+        """
+        Print the manual from the predefined file.
+        """
         with open("man.txt", 'r') as man:
             print(man.read())
 
@@ -53,10 +55,13 @@ class UI:
         print("(" + str(len(self.__org)) + " courses, " + str(self.__org.total_work()) + " tasks)")
         for name, work in self.__org:
             print("-" * self.NUM_CNAME, end='')
-            print("-" * len(work))
-            print(name)
+            print("-" * self.NUM_CWORK * len(work))
+            print(name + ": ", end='')
+            for w in work:
+                print(w + " ", end='')
+            print()
             print("-" * self.NUM_CNAME, end='')
-            print("-" * len(work))
+            print("-" * self.NUM_CWORK * len(work))
 
     def stop(self):
         self.__running = False
