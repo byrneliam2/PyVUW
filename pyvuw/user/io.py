@@ -6,7 +6,7 @@ PyVUW
 import json
 from org.organiser import Organiser
 
-JSON_NAME = "store.json"
+JSON_NAME = "store/org.json"
 
 
 class PyVUWInputStream:
@@ -14,14 +14,10 @@ class PyVUWInputStream:
     @staticmethod
     def read_in():
         org = Organiser()
-        # open JSON dictionary
         with open(JSON_NAME, 'r') as js:
             js_dict = json.load(js)
-        # stop here if empty
         if len(js_dict) == 0:
             return org
-        # otherwise, unload
-        # note how arguments are packed into new lists to fit method arguments
         org_dict = js_dict["_Organiser__courses"]
         for course, work in org_dict.items():
             org.add_data(course, work)

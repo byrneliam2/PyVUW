@@ -22,7 +22,8 @@ class Organiser:
 
     def add_data(self, course, work):
         """
-        Add a new course to the organiser.
+        Add a new course to the organiser. Note that the work argument is read into
+        the organiser as a whitespace-separated list from the given arguments.
         """
         if course not in self.__courses.keys():
             self.__courses[course] = work
@@ -31,7 +32,8 @@ class Organiser:
 
     def del_data(self, course, work):
         """
-        Remove a course from the organiser.
+        Remove a course from the organiser. Note that the work argument is read into
+        the organiser as a whitespace-separated list from the given arguments.
         """
         if course in self.__courses.keys():
             if len(work) == 0:
@@ -46,6 +48,6 @@ class Organiser:
         :return: number of tasks
         """
         count = 0
-        for lst in self.__courses.values():
-            count += len(lst)
+        for work in self.__courses.values():
+            count += len(work)
         return count
