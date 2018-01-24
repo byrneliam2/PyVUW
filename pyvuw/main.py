@@ -16,7 +16,7 @@ class Main:
     def __init__(self):
         self.org = PyVUWInputStream.read_in()
         self.ui = UI(self.org)
-        while self.ui.is_running():
+        while self.ui.running:
             self.ui.do_next()
         PyVUWOutputStream.write_out(self.org)
 

@@ -12,13 +12,13 @@ class Organiser:
     """
 
     def __init__(self):
-        self.__courses = {}
+        self._courses = {}
 
     def __iter__(self):
-        return iter(self.__courses.items())
+        return iter(self._courses.items())
 
     def __len__(self):
-        return len(self.__courses)
+        return len(self._courses)
 
     # ------------------------------------------------------------------------------
 
@@ -27,22 +27,22 @@ class Organiser:
         Add a new course to the organiser. Note that the work argument is read into
         the organiser as a whitespace-separated list from the given arguments.
         """
-        if course not in self.__courses.keys():
-            self.__courses[course] = work
+        if course not in self._courses.keys():
+            self._courses[course] = work
         else:
-            self.__courses.get(course).extend(work)
+            self._courses.get(course).extend(work)
 
     def del_data(self, course, work):
         """
         Remove a course from the organiser. Note that the work argument is read into
         the organiser as a whitespace-separated list from the given arguments.
         """
-        if course in self.__courses.keys():
+        if course in self._courses.keys():
             if len(work) == 0:
-                del self.__courses[course]
+                del self._courses[course]
             else:
                 for d in work:
-                    self.__courses.get(course).remove(d)
+                    self._courses.get(course).remove(d)
 
     def total_work(self):
         """
@@ -50,6 +50,6 @@ class Organiser:
         :return: number of tasks
         """
         count = 0
-        for work in self.__courses.values():
+        for work in self._courses.values():
             count += len(work)
         return count
