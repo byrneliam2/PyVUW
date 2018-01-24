@@ -1,7 +1,15 @@
 =============================================================================================
-a course [date]
-- Add a course into the organiser. If a date is present, a work record is added to the course
-  (assuming it exists).
+PYVUW MANUAL
+Last Updated: 24/01/2018
+
+a course [date]*
+- Add a course into the organiser. If dates are present, work records are added to the course.
+
+del course [date]*
+- Delete a course from the organiser. If dates are present, only those dates are removed.
+
+s
+- Save the current organiser without exiting the program.
 
 v
 - View the organiser's current courses and tasks.

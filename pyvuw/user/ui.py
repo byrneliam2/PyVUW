@@ -23,6 +23,7 @@ class UI:
     def do_next(self):
         """
         Take a user input and perform the operation it translates to, if it is correct.
+        TODO split this out to a controller?
         """
         args = input("> ").split()
         if args[0] == "a":
@@ -31,6 +32,8 @@ class UI:
             self.__org.del_data(args[1], args[2:])
         elif args[0] == "man":
             self.print_man()
+        elif args[0] == "s":
+            pass
         elif args[0] == "v":
             self.print_all()
         elif args[0] == "x":

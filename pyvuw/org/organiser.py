@@ -20,6 +20,8 @@ class Organiser:
     def __len__(self):
         return len(self.__courses)
 
+    # ------------------------------------------------------------------------------
+
     def add_data(self, course, work):
         """
         Add a new course to the organiser. Note that the work argument is read into
