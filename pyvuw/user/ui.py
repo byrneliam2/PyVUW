@@ -3,6 +3,8 @@ Liam Byrne (byrneliam2)
 PyVUW
 """
 
+from user.io import PyVUWOutputStream
+
 
 class UI:
 
@@ -33,7 +35,7 @@ class UI:
         elif args[0] == "man":
             self.print_man()
         elif args[0] == "s":
-            pass
+            PyVUWOutputStream.write_out(self.__org)
         elif args[0] == "v":
             self.print_all()
         elif args[0] == "x":

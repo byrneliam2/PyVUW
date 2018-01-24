@@ -6,7 +6,8 @@ a course [date]*
 - Add a course into the organiser. If dates are present, work records are added to the course.
 
 del course [date]*
-- Delete a course from the organiser. If dates are present, only those dates are removed.
+- Delete a course from the organiser. If dates are present, only those dates are removed. Not
+  specifying dates results in the whole course being deleted.
 
 s
 - Save the current organiser without exiting the program.
