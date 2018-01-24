@@ -46,7 +46,7 @@ class UI:
         """
         Print the manual from the predefined file.
         """
-        with open("man.txt", 'r') as man:
+        with open("store/man.txt", 'r') as man:
             print(man.read())
 
     def print_all(self):
