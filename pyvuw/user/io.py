@@ -9,7 +9,11 @@ from org.organiser import Organiser
 JSON_NAME = "store/org.json"
 
 
-class PyVUWInputStream:
+class InputHandler:
+
+    @staticmethod
+    def eval_input(args):
+        pass
 
     @staticmethod
     def read_in():
@@ -24,7 +28,7 @@ class PyVUWInputStream:
         return org
 
 
-class PyVUWOutputStream:
+class OutputHandler:
 
     @staticmethod
     def write_out(org):
