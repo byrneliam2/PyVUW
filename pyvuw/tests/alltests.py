@@ -1,4 +1,4 @@
-    """
+"""
 Liam Byrne (byrneliam2)
 PyVUW
 """
@@ -7,6 +7,9 @@ import unittest
 
 
 class AllTests(unittest.TestCase):
+    """
+    All unit tests for the PyVUW application.
+    """
     
     def setUp(self):
         pass
