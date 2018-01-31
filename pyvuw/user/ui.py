@@ -31,10 +31,6 @@ class UI:
         if args[0] == "a":
             self._org.add_data(args[1], args[2:])
         elif args[0] == "del":
-            # special case: either we can delete by specifying the exact string to delete
-            # or the index of the item to delete
-            if args[1].startswith("["):
-                pass
             self._org.del_data(args[1], args[2:])
         # no argument commands
         elif args[0] == "man":
@@ -60,7 +56,7 @@ class UI:
         """
         Reprint the entire organiser.
         """
-
+        # TODO make n_ variables dynamic based on string length
         def print_lines(n_name, n_work):
             print("-" * n_name, end='')
             print("-" * n_work * len(work))

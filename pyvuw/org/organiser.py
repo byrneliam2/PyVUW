@@ -22,33 +22,47 @@ class Organiser:
 
     # ------------------------------------------------------------------------------
 
-    def add_data(self, course, work):
+    def add_data(self, course, tasks):
         """
-        Add a new course to the organiser. Note that the work argument is read into
-        the organiser as a whitespace-separated list from the given arguments.
+        Add a new course to the organiser. If tasks are present, those are immediately
+        added into the newly built course. Note that the tasks argument is read into
+        the organiser as the raw whitespace-separated list from the input.
         """
         if course not in self._courses.keys():
-            self._courses[course] = work
+            self._courses[course] = tasks
         else:
-            self._courses.get(course).extend(work)
+            self._courses.get(course).extend(tasks)
 
-    def del_data(self, course, work):
+    def del_data(self, course, tasks):
         """
-        Remove a course from the organiser. Note that the work argument is read into
-        the organiser as a whitespace-separated list from the given arguments.
+        Remove either a course from the organiser, or if tasks are present, delete
+        only the specified tasks. Note that the tasks argument is read into
+        the organiser as the raw whitespace-separated list from the input.
         """
         if course in self._courses.keys():
-            if len(work) == 0:
+            # no tasks? delete everything
+            if len(tasks) == 0:
                 del self._courses[course]
             else:
-                for d in work:
-                    if d in self._courses.get(course):
-                        self._courses.get(course).remove(d)
+                for t in tasks:
+                    # check if the task is in index representation first
+                    if t.startswith("["):
+                        self.del_index(course, int(t[1])-1)
+                    if t not in self._courses.get(course):
+                        continue
+                    else:
+                        self._courses.get(course).remove(t)
+
+    def del_index(self, course, index):
+        """
+        Remove a task from a course in the organiser by index, if the index is within range.
+        """
+        if 0 <= index < len(self._courses.get(course)):
+            del self._courses.get(course)[index]
 
     def total_work(self):
         """
         Return the number of assignments, reports, etc. in total across all courses.
-        :return: number of tasks
         """
         count = 0
         for work in self._courses.values():
