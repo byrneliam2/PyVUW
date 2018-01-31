@@ -10,8 +10,6 @@ class UI:
 
     # Printing constants
     NUM_TNAME = 10
-    NUM_CNAME = 10
-    NUM_CWORK = 4
 
     # Execution
     running = True
@@ -63,17 +61,17 @@ class UI:
         Reprint the entire organiser.
         """
 
-        def print_lines():
-            print("-" * self.NUM_CNAME, end='')
-            print("-" * self.NUM_CWORK * len(work))
+        def print_lines(n_name, n_work):
+            print("-" * n_name, end='')
+            print("-" * n_work * len(work))
 
         print("=" * self.NUM_TNAME + " PyVUW Organiser " + "=" * self.NUM_TNAME)
         print()
         print("(" + str(len(self._org)) + " courses, " + str(self._org.total_work()) + " tasks)")
         for name, work in self._org:
-            print_lines()
+            print_lines(10, 4)
             print(name + ": ", end='')
             for w in work:
                 print(w + " ", end='')
             print()
-            print_lines()
+            print_lines(10, 4)

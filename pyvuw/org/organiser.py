@@ -42,7 +42,8 @@ class Organiser:
                 del self._courses[course]
             else:
                 for d in work:
-                    self._courses.get(course).remove(d)
+                    if d in self._courses.get(course):
+                        self._courses.get(course).remove(d)
 
     def total_work(self):
         """
