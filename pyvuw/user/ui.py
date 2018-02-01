@@ -18,10 +18,18 @@ class UI:
         self._org = org
         self.print_all()
 
+    # ------------------------------------------------------------------------------
+
     def do_next(self):
         """
         Take a user input and perform the operation it translates to, if it is correct.
         """
+
+        def arg_check():
+            if len(args) == 1:
+                print("error: need more arguments")
+                return True
+            return False
 
         # get the input and split into a list of arguments
         args = input("> ").split()
@@ -32,8 +40,12 @@ class UI:
 
         # commands with arguments
         if args[0] == "a":
+            if arg_check():
+                return
             self._org.add_data(args[1], args[2:])
         elif args[0] == "del":
+            if arg_check():
+                return
             self._org.del_data(args[1], args[2:])
 
         # no argument commands

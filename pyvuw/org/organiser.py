@@ -3,8 +3,6 @@ Liam Byrne (byrneliam2)
 PyVUW
 """
 
-import org.exception
-
 
 class Organiser:
     """
@@ -30,8 +28,6 @@ class Organiser:
         added into the newly built course. Note that the tasks argument is read into
         the organiser as the raw whitespace-separated list from the input.
         """
-        if course is None:
-            raise org.exception.TooFewArgumentsException
         if course not in self._courses.keys():
             self._courses[course] = tasks
         else:
@@ -48,11 +44,11 @@ class Organiser:
             if len(tasks) == 0:
                 del self._courses[course]
             else:
+                task_ref = self._courses.get(course)[:]
                 for t in tasks:
                     # check if the task is in index representation first
-                    #if t.startswith("["):
-                    if (t.startswith("[") and t.endswith("]")) or t.startswith("|"):
-                        self.del_index(course, int(t[1])-1) #fix dynamic
+                    if t.startswith("[") and t.endswith("]"):
+                        self._courses.get(course).remove(task_ref[int(t[1])-1])
                     if t not in self._courses.get(course):
                         continue
                     else:
