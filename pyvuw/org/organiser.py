@@ -46,9 +46,9 @@ class Organiser:
             else:
                 for t in tasks:
                     # check if the task is in index representation first
-                    if t.startswith("["):
-                    #if (t.startswith("[") and t.endswith("]")) or t.startswith("|"):
-                        self.del_index(course, int(t[1])-1)
+                    #if t.startswith("["):
+                    if (t.startswith("[") and t.endswith("]")) or t.startswith("|"):
+                        self.del_index(course, int(t[1])-1) #fix dynamic
                     if t not in self._courses.get(course):
                         continue
                     else:

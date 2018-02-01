@@ -4,18 +4,22 @@ PyVUW
 """
 
 import unittest
+import org.organiser
 
 
 class AllTests(unittest.TestCase):
     """
     All unit tests for the PyVUW application.
     """
-    
-    def setUp(self):
+
+    @staticmethod
+    def test_foo():
+        # o = org.organiser.Organiser()
+        # try:
+        #     o.add_data([], [])
+        # except:
         pass
-        
-    def test_foo(self):
-        self.assertEqual(1, 1)
-        
+
+
 if __name__ == "__main__":
     unittest.main()
