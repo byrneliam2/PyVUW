@@ -3,8 +3,9 @@ Liam Byrne (byrneliam2)
 PyVUW
 """
 
+import user.io
+
 from user.ui import UI
-from user.io import *
 
 
 class Main:
@@ -14,11 +15,11 @@ class Main:
     """
 
     def __init__(self):
-        self.org = InputHandler.read_in()
+        self.org = user.io.InputHandler.read_in()
         self.ui = UI(self.org)
         while self.ui.running:
             self.ui.do_next()
-        OutputHandler.write_out(self.org)
+        user.io.OutputHandler.write_out(self.org)
 
 
 # start

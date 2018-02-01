@@ -3,6 +3,8 @@ Liam Byrne (byrneliam2)
 PyVUW
 """
 
+import org.exception
+
 
 class Organiser:
     """
@@ -28,6 +30,8 @@ class Organiser:
         added into the newly built course. Note that the tasks argument is read into
         the organiser as the raw whitespace-separated list from the input.
         """
+        if course is None:
+            raise org.exception.TooFewArgumentsException
         if course not in self._courses.keys():
             self._courses[course] = tasks
         else:

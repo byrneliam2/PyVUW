@@ -4,6 +4,7 @@ PyVUW
 """
 
 import json
+
 from org.organiser import Organiser
 
 JSON_NAME = "store/org.json"
@@ -23,8 +24,8 @@ class InputHandler:
         if len(js_dict) == 0:
             return org
         org_dict = js_dict["_courses"]
-        for course, work in org_dict.items():
-            org.add_data(course, work)
+        for course, tasks in org_dict.items():
+            org.add_data(course, tasks)
         return org
 
 

@@ -3,7 +3,7 @@ Liam Byrne (byrneliam2)
 PyVUW
 """
 
-from user.io import OutputHandler
+import user.io
 
 
 class UI:
@@ -26,22 +26,28 @@ class UI:
         # get the input and split into a list of arguments
         args = input("> ").split()
 
-        # determine action from input
+        # no input, no response
+        if len(args) == 0:
+            return
+
         # commands with arguments
         if args[0] == "a":
             self._org.add_data(args[1], args[2:])
         elif args[0] == "del":
             self._org.del_data(args[1], args[2:])
+
         # no argument commands
         elif args[0] == "man":
             self.print_man()
         elif args[0] == "s":
-            OutputHandler.write_out(self._org)
+            user.io.OutputHandler.write_out(self._org)
         elif args[0] == "v":
             self.print_all()
         elif args[0] == "x":
             self.running = False
+
         else:
+            # it must be an invalid command
             print("error: command " + args[0] + " is not valid")
 
     @staticmethod
@@ -56,18 +62,23 @@ class UI:
         """
         Reprint the entire organiser.
         """
-        # TODO make n_ variables dynamic based on string length
-        def print_lines(n_name, n_work):
-            print("-" * n_name, end='')
-            print("-" * n_work * len(work))
 
         print("=" * self.NUM_TNAME + " PyVUW Organiser " + "=" * self.NUM_TNAME)
         print()
         print("(" + str(len(self._org)) + " courses, " + str(self._org.total_work()) + " tasks)")
-        for name, work in self._org:
-            print_lines(10, 4)
-            print(name + ": ", end='')
-            for w in work:
-                print(w + " ", end='')
+        print()
+        for course, tasks in self._org:
+            print(course + ": ", end='')
+            for t in tasks:
+                print(t + " ", end='')
             print()
-            print_lines(10, 4)
+            print("-" * len(course), end='')
+            print("-" * (sum(len(t) for t in tasks) + len(tasks) + 1))
+
+            # note that the above line essentially prints a series of hyphens the exact same length
+            # of the line printed above it, this is to separate the courses and to provide a visual
+            # indication of the number of tasks for that course.
+            # what if the course names all have different lengths? won't this look weird then?
+            # typically in a university setting, courses will all have some naming convention (such
+            # as SWEN222) where the course codes are the same length, therefore we rely on this
+            # assumption.
