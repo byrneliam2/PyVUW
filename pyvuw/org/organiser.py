@@ -48,6 +48,8 @@ class Organiser:
                 for t in tasks:
                     # check if the task is in index representation first
                     if t.startswith("[") and t.endswith("]"):
+                        # need to account for dynamic list length
+                        # extra -1 for indexing from 1 for user ease
                         del self._courses.get(course)[int(t[1]) - deleted - 1]
                         deleted += 1
                     if t not in self._courses.get(course):
@@ -55,13 +57,6 @@ class Organiser:
                     else:
                         self._courses.get(course).remove(t)
                         deleted += 1
-
-    def del_index(self, course, index):
-        """
-        Remove a task from a course in the organiser by index, if the index is within range.
-        """
-        if 0 <= index < len(self._courses.get(course)):
-            del self._courses.get(course)[index]
 
     def total_work(self):
         """
