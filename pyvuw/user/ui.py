@@ -77,6 +77,7 @@ class UI:
 
         print("=" * self.NUM_TNAME + " PyVUW Organiser " + "=" * self.NUM_TNAME)
         print()
+        print("Type \"man\" for help.")
         print("(" + str(len(self._org)) + " courses, " + str(self._org.total_work()) + " tasks)")
         print()
         for course, tasks in self._org:

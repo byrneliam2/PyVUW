@@ -44,15 +44,17 @@ class Organiser:
             if len(tasks) == 0:
                 del self._courses[course]
             else:
-                task_ref = self._courses.get(course)[:]
+                deleted = 0
                 for t in tasks:
                     # check if the task is in index representation first
                     if t.startswith("[") and t.endswith("]"):
-                        self._courses.get(course).remove(task_ref[int(t[1])-1])
+                        del self._courses.get(course)[int(t[1]) - deleted - 1]
+                        deleted += 1
                     if t not in self._courses.get(course):
                         continue
                     else:
                         self._courses.get(course).remove(t)
+                        deleted += 1
 
     def del_index(self, course, index):
         """
