@@ -50,7 +50,7 @@ class UI:
 
         # no argument commands
         elif args[0] == "man":
-            self.print_man()
+            print(user.io.OutputHandler.write_man())
         elif args[0] == "s":
             user.io.OutputHandler.write_out(self._org)
         elif args[0] == "v":
@@ -61,14 +61,6 @@ class UI:
         else:
             # it must be an invalid command
             print("error: command " + args[0] + " is not valid")
-
-    @staticmethod
-    def print_man():
-        """
-        Print the manual from the predefined file.
-        """
-        with open("store/man.txt", 'r') as man:
-            print(man.read())
 
     def print_all(self):
         """

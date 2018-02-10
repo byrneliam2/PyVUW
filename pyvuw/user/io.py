@@ -4,10 +4,13 @@ PyVUW
 """
 
 import json
+import os
 
 from org.organiser import Organiser
 
-JSON_NAME = "store/org.json"
+JSON_NAME = "org.json"
+MAN_NAME = "man.txt"
+DIRECTORY = os.path.dirname(__file__) + "/../store/"
 
 
 class InputHandler:
@@ -19,7 +22,7 @@ class InputHandler:
     @staticmethod
     def read_in():
         org = Organiser()
-        with open(JSON_NAME, 'r') as js:
+        with open(os.path.join(DIRECTORY, JSON_NAME), 'r') as js:
             js_dict = json.load(js)
         if len(js_dict) == 0:
             return org
@@ -33,5 +36,10 @@ class OutputHandler:
 
     @staticmethod
     def write_out(org):
-        with open(JSON_NAME, 'w') as out:
+        with open(os.path.join(DIRECTORY, JSON_NAME), 'w') as out:
             json.dump(org.__dict__, out, default=lambda obj: obj.__dict__, indent=1)
+
+    @staticmethod
+    def write_man():
+        with open(os.path.join(DIRECTORY, MAN_NAME), 'r') as man:
+            return man.read()
