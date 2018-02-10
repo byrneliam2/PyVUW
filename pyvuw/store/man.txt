@@ -19,4 +19,7 @@ v
 
 x
 - Save the organiser to the storage file and exit.
+
+x!
+- Force quit the program (without saving.)
 =============================================================================================

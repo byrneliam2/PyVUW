@@ -57,6 +57,8 @@ class UI:
             self.print_all()
         elif args[0] == "x":
             self.running = False
+        elif args[0] == "x!":
+            exit()
 
         else:
             # it must be an invalid command
