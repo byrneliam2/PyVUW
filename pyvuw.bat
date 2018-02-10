@@ -1,0 +1,1 @@
+@"<Python EXE>" "<PyVUW main.py>"

@@ -1,2 +1,2 @@
 # pyvuw
-A basic organiser for university coursework. Manually record courses, the tasks associated with them and their due dates. Made as a tool for myself to use and also as a Python practice playground.
+A basic organiser for university coursework. Can record courses and the tasks associated with them. Made as a personal tool to use at Victoria University of Wellington.
