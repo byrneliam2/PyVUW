@@ -57,7 +57,7 @@ class UI:
             self.print_all()
         elif args[0] == "x":
             self.running = False
-        elif args[0] == "x!":
+        elif args[0] == "xf":
             exit()
 
         else:

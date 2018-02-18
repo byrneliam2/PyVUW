@@ -1,0 +1,4 @@
+del course [ date ]* | [ "[" index "]" ]*
+- Delete a course from the organiser. If dates or indices are present, only those tasks are
+  removed. Not specifying dates results in the whole course being deleted. Note that indexing
+  starts at 1.

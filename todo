@@ -1,3 +1,4 @@
+- Testing
+- Break manual into show all commands on "man" and specified help for each command
 - Support for quoted multi-word arguments
-- Break up manual?
 - Settings JSON?

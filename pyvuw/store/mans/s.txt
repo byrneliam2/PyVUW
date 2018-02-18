@@ -1,0 +1,2 @@
+s
+- Save the current organiser without exiting the program.

@@ -1,0 +1,25 @@
+=============================================================================================
+PYVUW MANUAL
+Last Updated: 10/02/2018
+
+a course [ date ]*
+- Add a course into the organiser. If tasks are present, they are immediately added to the
+  course.
+
+del course [ date ]* | [ "[" index "]" ]*
+- Delete a course from the organiser. If dates or indices are present, only those tasks are
+  removed. Not specifying dates results in the whole course being deleted. Note that indexing
+  starts at 1.
+
+s
+- Save the current organiser without exiting the program.
+
+v
+- View the organiser's current courses and tasks.
+
+x
+- Save the organiser to the storage file and exit.
+
+xf
+- Force quit the program (without saving.)
+=============================================================================================

@@ -1,0 +1,3 @@
+a course [ date ]*
+- Add a course into the organiser. If tasks are present, they are immediately added to the
+  course.
