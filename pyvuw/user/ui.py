@@ -47,10 +47,11 @@ class UI:
             if arg_check():
                 return
             self._org.del_data(args[1], args[2:])
+        elif args[0] == "man":
+            # print(user.io.OutputHandler.write_man())
+            self.print_man(args[1] if len(args) == 2 else None)
 
         # no argument commands
-        elif args[0] == "man":
-            print(user.io.OutputHandler.write_man())
         elif args[0] == "s":
             user.io.OutputHandler.write_out(self._org)
         elif args[0] == "v":
@@ -62,7 +63,22 @@ class UI:
 
         else:
             # it must be an invalid command
-            print("error: command " + args[0] + " is not valid")
+            self.print_invalid(args[0])
+
+    def print_man(self, cmd):
+        mans = user.io.OutputHandler.list_mans()
+        if cmd is None:
+            print("Current commands: ")
+            print(mans)
+            print("\nType \"man [cmd]\" to learn more about the command.")
+        elif cmd not in mans:
+            self.print_invalid(cmd)
+        else:
+            print(user.io.OutputHandler.print_man(cmd))
+
+    @staticmethod
+    def print_invalid(cmd):
+        print("error: command " + cmd + " is not valid")
 
     def print_all(self):
         """
