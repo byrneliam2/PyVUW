@@ -25,6 +25,7 @@ class UI:
         Take a user input and perform the operation it translates to, if it is correct.
         """
 
+        # Inner function to check for proper number of arguments
         def arg_check():
             if len(args) == 1:
                 print("error: need more arguments")
@@ -66,18 +67,33 @@ class UI:
             self.print_invalid(args[0])
 
     def print_man(self, cmd):
+        """
+        Print the manual. If no command is present, then the full list of manuals available
+        is printed out. Otherwise, that specific manual is printed.
+        :param cmd: command to look up manual for
+        """
         mans = user.io.OutputHandler.list_mans()
         if cmd is None:
+            # None type passed in indicates no command to look up
+            # could use list slicing, but we are only looking for one argument so manipulating
+            # a list probably isn't worth it
             print("Current commands: ")
             print(mans)
             print("\nType \"man [cmd]\" to learn more about the command.")
         elif cmd not in mans:
+            # there must be a command, but is it valid? use the mans list we have created already
+            # to check
             self.print_invalid(cmd)
         else:
+            # look up and print the manual
             print(user.io.OutputHandler.print_man(cmd))
 
     @staticmethod
     def print_invalid(cmd):
+        """
+        Alert the user that the command they have entered is not valid.
+        :param cmd: invalid command
+        """
         print("error: command " + cmd + " is not valid")
 
     def print_all(self):
