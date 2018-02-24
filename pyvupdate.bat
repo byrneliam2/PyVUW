@@ -1,1 +1,1 @@
-xcopy /s/y <from> <to>
+xcopy /s /y /exclude:<"file listing org.json" <from> <to>
