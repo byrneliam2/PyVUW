@@ -1,4 +1,5 @@
 - Testing
 - Support for quoted multi-word arguments
+- Edit command ("e", new/old)
 - Settings JSON?
 - xcopy updater
