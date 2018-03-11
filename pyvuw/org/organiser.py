@@ -58,6 +58,15 @@ class Organiser:
                         self._courses.get(course).remove(t)
                         deleted += 1
 
+    def edit_data(self, course, old, new):
+        """
+        Edit an existing task within a course.
+        """
+        # if course in self._courses.keys():
+        #     if old in self._courses.get(course):
+        #         self._courses.get(course)
+        pass
+
     def total_work(self):
         """
         Return the number of assignments, reports, etc. in total across all courses.

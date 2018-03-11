@@ -8,9 +8,6 @@ import user.io
 
 class UI:
 
-    # Printing constants
-    NUM_TNAME = 10
-
     # Execution
     running = True
 
@@ -25,9 +22,12 @@ class UI:
         Take a user input and perform the operation it translates to, if it is correct.
         """
 
-        # Inner function to check for proper number of arguments
-        def arg_check():
-            if len(args) == 1:
+        def arg_check(num):
+            """
+            Inner function to check for proper number of arguments.
+            :param num: number of expected trailing arguments (after the command itself)
+            """
+            if len(args[1:]) < num:
                 print("error: need more arguments")
                 return True
             return False
@@ -41,13 +41,17 @@ class UI:
 
         # commands with arguments
         if args[0] == "a":
-            if arg_check():
+            if arg_check(1):
                 return
             self._org.add_data(args[1], args[2:])
         elif args[0] == "del":
-            if arg_check():
+            if arg_check(1):
                 return
             self._org.del_data(args[1], args[2:])
+        elif args[0] == "e":
+            if arg_check(3):
+                return
+            self._org.edit_data(args[1], args[2], args[3])
         elif args[0] == "man":
             # print(user.io.OutputHandler.write_man())
             self.print_man(args[1] if len(args) == 2 else None)
@@ -101,7 +105,9 @@ class UI:
         Reprint the entire organiser.
         """
 
-        print("=" * self.NUM_TNAME + " PyVUW Organiser " + "=" * self.NUM_TNAME)
+        t_name = 10
+
+        print("=" * t_name + " PyVUW Organiser " + "=" * t_name)
         print()
         print("Type \"man\" for help.")
         print("(" + str(len(self._org)) + " courses, " + str(self._org.total_work()) + " tasks)")
