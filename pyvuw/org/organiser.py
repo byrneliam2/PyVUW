@@ -8,7 +8,8 @@ class Organiser:
     """
     The Organiser is the hub of the application. It provides a collection of courses
     and options to modify each course. The courses are referred to by name and their
-    workloads are stored as variations of the Coursework class.
+    workloads are stored as lists within the dictionary that makes up the core of
+    this class.
     """
 
     def __init__(self):
@@ -35,7 +36,7 @@ class Organiser:
 
     def del_data(self, course, tasks):
         """
-        Remove either a course from the organiser, or if tasks are present, delete
+        Remove either a course from the organiser, or if tasks are present,
         only the specified tasks. Note that the tasks argument is read into
         the organiser as the raw whitespace-separated list from the input.
         """
@@ -62,9 +63,10 @@ class Organiser:
         """
         Edit an existing task within a course.
         """
-        # if course in self._courses.keys():
-        #     if old in self._courses.get(course):
-        #         self._courses.get(course)
+        if course in self._courses.keys():
+            tasks = self._courses.get(course)
+            if old in tasks:
+                tasks[tasks.index(old)] = new
         pass
 
     def total_work(self):
