@@ -1,0 +1,2 @@
+e course old new
+- Edit an existing task within a course.

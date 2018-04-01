@@ -110,8 +110,10 @@ class UI:
             # None type passed in indicates no command to look up
             # could use list slicing, but we are only looking for one argument so manipulating
             # a list probably isn't worth it
-            print("Current commands: ")
-            print(mans)
+            print("Available commands: ")
+            for m in mans:
+                print(m, end=' ')
+            print()
             print("\nType \"man [cmd]\" to learn more about the command.")
         elif cmd not in mans:
             # there must be a command, but is it valid? use the mans list we have created already
