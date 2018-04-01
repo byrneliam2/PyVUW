@@ -41,13 +41,13 @@ class UI:
             # commands with arguments
             if args[0] == "a":
                 arg_check(1)
-                self._org.add_data(args[1], args[2:])
+                self._org.add_data(args[1], self.format_tasks(args[2:]))
             elif args[0] == "del":
                 arg_check(1)
-                self._org.del_data(args[1], args[2:])
+                self._org.del_data(args[1], self.format_tasks(args[2:]))
             elif args[0] == "e":
                 arg_check(3)
-                self._org.edit_data(args[1], args[2], args[3])  # ignore anything else after arg 3
+                self._org.edit_data(args[1], args[2], args[3])
             elif args[0] == "man":
                 self.print_man(args[1] if len(args) == 2 else None)
 
@@ -61,8 +61,7 @@ class UI:
             elif args[0] == "xf":
                 exit()
 
-            else:
-                # it must be an invalid command
+            else:  # it must be an invalid command
                 raise ImproperFormatException(args[0] + " is not a valid command")
 
         except ImproperFormatException as e:
@@ -72,21 +71,32 @@ class UI:
     def format_tasks(tasks):
         """
         Take a list of tasks and return a new one that is properly formatted such that
-        any elements surrounded by quotes are combined into a single task.
+        any elements surrounded by quotes are combined (built) into a single task.
         """
         output = []
         current = ""
+        building = False
         for t in tasks:
-            if t.startswith("\"") and not (t.endswith("\"")):
-                current += t.replace("\"", "")
-                while not t.endswith("\""):
-                    current += t
-                    continue
-            else:
-                if t.endswith("\""):
-                    t = t.replace("\"", "")
+            if building and not t.endswith("\""):  # middle of a build
+                current += t + " "
+                continue
+            elif t.startswith("\"") and not (t.endswith("\"")):  # start of a build
+                current += t + " "
+                building = True
+                continue
+            elif t.endswith("\"") and building:  # end of a build
                 current += t
                 output.append(current)
+                building = False
+                current = ""
+            else:  # not a build
+                output.append(t)
+
+        if building:
+            # there is a build that remains open, this should not happen
+            # raise an exception in the calling method do_next()
+            raise ImproperFormatException("command includes misquoted arguments")
+
         return output
 
     def print_man(self, cmd):
@@ -135,8 +145,7 @@ class UI:
             for t in tasks:
                 print(t + " ", end='')
             print()
-            print("-" * len(course), end='')
-            print("-" * (sum(len(t) for t in tasks) + len(tasks) + 1))
+            print("-" * len(course) + "-" * (sum(len(t) for t in tasks) + len(tasks) + 1))
 
             # note that the above line essentially prints a series of hyphens the exact same length
             # of the line printed above it, this is to separate the courses and to provide a visual
