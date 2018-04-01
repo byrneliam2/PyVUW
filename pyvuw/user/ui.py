@@ -28,47 +28,66 @@ class UI:
             :param num: number of expected trailing arguments (after the command itself)
             """
             if len(args[1:]) < num:
-                print("error: need more arguments")
-                return True
-            return False
+                raise ImproperFormatException("need more arguments")
 
         # get the input and split into a list of arguments
         args = input("> ").split()
 
-        # no input, no response
-        if len(args) == 0:
-            return
+        try:
+            # no input, no response
+            if len(args) == 0:
+                raise ImproperFormatException("no command found")
 
-        # commands with arguments
-        if args[0] == "a":
-            if arg_check(1):
-                return
-            self._org.add_data(args[1], args[2:])
-        elif args[0] == "del":
-            if arg_check(1):
-                return
-            self._org.del_data(args[1], args[2:])
-        elif args[0] == "e":
-            if arg_check(3):
-                return
-            self._org.edit_data(args[1], args[2], args[3])
-        elif args[0] == "man":
-            # print(user.io.OutputHandler.write_man())
-            self.print_man(args[1] if len(args) == 2 else None)
+            # commands with arguments
+            if args[0] == "a":
+                arg_check(1)
+                self._org.add_data(args[1], args[2:])
+            elif args[0] == "del":
+                arg_check(1)
+                self._org.del_data(args[1], args[2:])
+            elif args[0] == "e":
+                arg_check(3)
+                self._org.edit_data(args[1], args[2], args[3])  # ignore anything else after arg 3
+            elif args[0] == "man":
+                self.print_man(args[1] if len(args) == 2 else None)
 
-        # no argument commands
-        elif args[0] == "s":
-            user.io.OutputHandler.write_out(self._org)
-        elif args[0] == "v":
-            self.print_all()
-        elif args[0] == "x":
-            self.running = False
-        elif args[0] == "xf":
-            exit()
+            # no argument commands
+            elif args[0] == "s":
+                user.io.OutputHandler.write_out(self._org)
+            elif args[0] == "v":
+                self.print_all()
+            elif args[0] == "x":
+                self.running = False
+            elif args[0] == "xf":
+                exit()
 
-        else:
-            # it must be an invalid command
-            self.print_invalid(args[0])
+            else:
+                # it must be an invalid command
+                raise ImproperFormatException(args[0] + " is not a valid command")
+
+        except ImproperFormatException as e:
+            self.print_error(str(e))
+
+    @staticmethod
+    def format_tasks(tasks):
+        """
+        Take a list of tasks and return a new one that is properly formatted such that
+        any elements surrounded by quotes are combined into a single task.
+        """
+        output = []
+        current = ""
+        for t in tasks:
+            if t.startswith("\"") and not (t.endswith("\"")):
+                current += t.replace("\"", "")
+                while not t.endswith("\""):
+                    current += t
+                    continue
+            else:
+                if t.endswith("\""):
+                    t = t.replace("\"", "")
+                current += t
+                output.append(current)
+        return output
 
     def print_man(self, cmd):
         """
@@ -87,18 +106,17 @@ class UI:
         elif cmd not in mans:
             # there must be a command, but is it valid? use the mans list we have created already
             # to check
-            self.print_invalid(cmd)
+            self.print_error(cmd + " is not a valid command")
         else:
             # look up and print the manual
             print(user.io.OutputHandler.print_man(cmd))
 
     @staticmethod
-    def print_invalid(cmd):
+    def print_error(error):
         """
-        Alert the user that the command they have entered is not valid.
-        :param cmd: invalid command
+        Alert the user to an error.
         """
-        print("error: command " + cmd + " is not valid")
+        print("error: " + error)
 
     def print_all(self):
         """
@@ -127,3 +145,12 @@ class UI:
             # typically in a university setting, courses will all have some naming convention (such
             # as SWEN222) where the course codes are the same length, therefore we rely on this
             # assumption.
+
+
+class ImproperFormatException(Exception):
+    """
+    Custom exception thrown in the case of bad input.
+    """
+
+    def __init__(self, message):
+        super().__init__(message)
