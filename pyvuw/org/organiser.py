@@ -71,6 +71,11 @@ class Organiser:
                 tasks[tasks.index(old)] = new
         pass
 
+    def do_by_index(self, tasks, func):
+        for t in tasks:
+            if t.startswith("[") and t.endswith("]"):
+                func(t)
+
     def total_work(self):
         """
         Return the number of assignments, reports, etc. in total across all courses.
