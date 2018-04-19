@@ -1,2 +1,2 @@
-e course old new
-- Edit an existing task within a course.
+e course (old | " [terms]+ " | [ "[" index "]" ]*) | (new | " [terms]+ ")
+- Edit an existing task within a course. Both tasks may be quoted or non-quoted, and the old course may be referred to directly or by using indexes (as in del.)

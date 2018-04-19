@@ -1,3 +1,2 @@
-a course [ date ]* | " [terms]+ "
-- Add a course into the organiser. If tasks are present, they are immediately added to the
-  course.
+a course [task]* | " [terms]+ "
+- Add a course into the organiser. If tasks are present, they are immediately added to the course.
