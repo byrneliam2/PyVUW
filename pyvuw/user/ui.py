@@ -47,7 +47,11 @@ class UI:
                 self._org.del_data(args[1], self.format_tasks(args[2:]))
             elif args[0] == "e":
                 arg_check(3)
-                self._org.edit_data(args[1], args[2], args[3])
+                tasks = self.format_tasks(args[2:])
+                if len(tasks) != 2:
+                    raise ImproperFormatException("incorrect number of arguments specified for edit")
+                else:
+                    self._org.edit_data(args[1], tasks[0], tasks[1])
             elif args[0] == "man":
                 self.print_man(args[1] if len(args) == 2 else None)
 
